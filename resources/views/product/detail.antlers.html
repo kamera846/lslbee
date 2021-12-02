@@ -1,0 +1,103 @@
+<!-- Open Content -->
+<section class="bg-light">
+    <div class="container pb-5">
+        <div class="row">
+            <div class="col-lg-5 mt-5">
+                <div class="card mb-3">
+                    <img class="card-img img-fluid" src="{{ image }}" alt="Card image cap" id="product-detail">
+                </div>
+            </div>
+            <!-- col end -->
+            <div class="col-lg-7 mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="h2">{{ title }}</h1>
+                        <p class="h3 py-2 price">{{  price }}</p>
+
+                        <script>
+                            var tag = window.document.getElementsByClassName('price')[0];
+                            var value = tag.innerHTML;
+                            var price = parseInt(value);
+            
+                            // request a currency format
+                            var output = price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
+                            tag.innerHTML = output;
+                        </script>
+
+                        <h6>Description:</h6>
+                        {{ description }}
+
+                        <h6>Compotition:</h6>
+                        {{ compotition }}
+
+                        {{ if marketplace !== null}}
+                            <h6>Marketplace</h6>
+                            <div class="row pb-3">
+                                {{ foreach:marketplace }}
+                                    <div class="col-12 col-md-6 d-grid mb-4">
+                                        <a href="{{ value }}" class="btn btn-success btn-lg" target="_blank">{{ key }}</a>
+                                    </div>
+                                {{ /foreach:marketplace }}
+                            </div>
+                        {{ /if}}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Close Content -->
+
+<!-- Start Article -->
+<section class="py-5">
+    <div class="container">
+        <div class="row text-left p-2 pb-3">
+            <h4>{{ current_product:title }}</h4>
+        </div>
+
+        <!--Start Carousel Wrapper-->
+        <div id="carousel-related-product">
+            {{ collection:product as="item" limit="16"}}
+                {{ item }}
+                    <div class="p-2 pb-3">
+                        <div class="product-wap card rounded-0">
+                            <div class="card rounded-0">
+                                <img class="card-img rounded-0 img-fluid" src="{{ image }}" style="height: 285px; object-fit: cover;">
+                                <a href="{{ url }}" class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center"></a>
+                            </div>
+                            <div class="card-body">
+                                <a href="{{ url }}" class="h3 text-decoration-none">{{ title }}</a>
+                                
+                                <p class="mb-0 mt-2 price-products">{{ price }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {{ /item }}
+            {{ /collection:product }}
+        </div>
+        {{ collection:product as="item" limit="16"}}
+            {{ item }}
+            <p id="index" hidden>0</p>
+            <script>
+                var elementIndex = window.document.getElementById('index');
+                var valueIndex = elementIndex.innerHTML;
+                var index = parseInt(valueIndex);
+                
+                var tagProducts = window.document.getElementsByClassName('price-products')[index];
+                var valueProducts = tagProducts.innerHTML;
+                var priceProducts = parseInt(valueProducts);
+                
+                // request a currency format
+                var output = priceProducts.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
+                tagProducts.innerHTML = output;
+
+                elementIndex.innerHTML = index + 1;
+            </script>
+            {{ /item }}
+        {{ /collection:product }}
+
+
+    </div>
+</section>
+<!-- End Article -->

@@ -1,0 +1,43 @@
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: title
+        field:
+          input_type: text
+          antlers: false
+          display: Title
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+      -
+        handle: description
+        field:
+          antlers: false
+          display: Description
+          type: textarea
+          icon: textarea
+          listable: hidden
+          instructions_position: above
+      -
+        handle: south
+        field:
+          input_type: text
+          antlers: false
+          display: 'Maps South Point'
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above
+      -
+        handle: west
+        field:
+          input_type: text
+          antlers: false
+          display: 'Map West Point'
+          type: text
+          icon: text
+          listable: hidden
+          instructions_position: above

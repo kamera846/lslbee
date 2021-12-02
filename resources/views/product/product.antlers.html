@@ -1,0 +1,48 @@
+<!-- Start Content -->
+<div class="container py-5">
+    <div class="row">
+
+        <div class="col-lg">
+
+            <div class="row">
+                
+                {{ collection:product as="item" }}
+                    {{ item }}
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card mb-4 product-wap rounded-0">
+                                <div class="card rounded-0">
+                                    <img class="card-img rounded-0 img-fluid" src="{{ image }}" style="height: 442px;object-fit: cover;">
+                                    <a href="{{ url }}" class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center"></a>
+                                </div>
+                                <div class="card-body">
+                                    <a href="{{ url }}" class="h2 text-decoration-none text-dark">{{ title }}</a>
+                                    <p class="card-text item-description">{{ description | raw }}</p>
+                                    <h5 class="text-muted price">{{ price }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <p id="index" hidden>0</p>
+                        <script>
+                            var elementIndex = window.document.getElementById('index');
+                            var valueIndex = elementIndex.innerHTML;
+                            var index = parseInt(valueIndex);
+                            
+                            var tagProducts = window.document.getElementsByClassName('price')[index];
+                            var valueProducts = tagProducts.innerHTML;
+                            var priceProducts = parseInt(valueProducts);
+                            
+                            // request a currency format
+                            var output = priceProducts.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
+                            tagProducts.innerHTML = output;
+
+                            elementIndex.innerHTML = index + 1;
+                        </script>
+                    {{ /item }}
+                {{ /collection:product }}
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!-- End Content -->

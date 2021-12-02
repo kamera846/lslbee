@@ -1,0 +1,155 @@
+<!-- Start Banner Hero -->
+<div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
+
+    <ol class="carousel-indicators">
+        {{ collection:carousel as="item" }}
+            {{ item }}
+                <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="0" class="slide-page"></li>
+            {{ /item }}
+        {{ /collection:carousel }}
+    </ol>
+
+    <div class="carousel-inner">
+
+        {{ collection:carousel as="item" }}
+            {{ item }}
+                <div class="carousel-item">
+                    <div class="container">
+                        <div class="row p-5">
+                            <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                                <img class="img-fluid" src="{{ image }}" alt="">
+                            </div>
+                            <div class="col-lg-6 mb-0 d-flex align-items-center">
+                                <div class="text-align-left">
+                                    <h1 class="h1">{{ title }}</h1>
+                                    <h3 class="h2">{{ sub_title }}</h3>
+                                    <p>{{ description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{ /item }}
+        {{ /collection:carousel }}
+
+        <script>
+            var element = document.getElementsByClassName("carousel-item");
+            var elementSlide = document.getElementsByClassName("slide-page");
+
+            element[1].classList.add("active");
+            elementSlide[1].classList.add("active");
+        </script>
+
+    </div>
+    <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#template-mo-zay-hero-carousel" role="button" data-bs-slide="prev">
+        <i class="fas fa-chevron-left"></i>
+    </a>
+    <a class="carousel-control-next text-decoration-none w-auto pe-3" href="#template-mo-zay-hero-carousel" role="button" data-bs-slide="next">
+        <i class="fas fa-chevron-right"></i>
+    </a>
+</div>
+<!-- End Banner Hero -->
+
+
+<!-- Start Banner -->
+<section class="bg-success py-5">
+    <div class="container">
+        <div class="row align-items-center py-5">
+            <div class="col-md-8 text-white">
+                <h1>{{ about_us:title }}</h1>
+                <p>{{ about_us:description }}</p>
+            </div>
+            <div class="col-md-4">
+                <img src="{{ about_us:image }}" alt="About Hero">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Close Banner -->
+
+
+<!-- Start Featured Product -->
+<section class="bg-light">
+    <div class="container py-5">
+        <div class="row text-center py-3">
+            <div class="col-lg-6 m-auto">
+                <h1 class="h1">{{ current_product:title }}</h1>
+                <p>{{ current_product:description }}</p>
+            </div>
+        </div>
+        <div class="row">
+            {{ collection:product as="item" limit="3"}}
+                {{ item }}
+                    <div class="col-12 col-md-6 col-lg-4 mb-4">
+                        <div class="card h-100">
+                            <a href="{{ url }}">
+                                <img src="{{ image }}" class="card-img-top" alt="" style="height: 442px;object-fit: cover;">
+                            </a>
+                            <div class="card-body">
+                                <a href="{{ url }}" class="h2 text-decoration-none text-dark">{{ title }}</a>
+                                <p class="card-text item-description">{{ description | raw }}</p>
+                                <h5 class="text-muted price">{{ price }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <p id="index" hidden>0</p>
+                    <script>
+                        var elementIndex = window.document.getElementById('index');
+                        var valueIndex = elementIndex.innerHTML;
+                        var index = parseInt(valueIndex);
+                        
+                        var tagProducts = window.document.getElementsByClassName('price')[index];
+                        var valueProducts = tagProducts.innerHTML;
+                        var priceProducts = parseInt(valueProducts);
+                        
+                        // request a currency format
+                        var output = priceProducts.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' });
+                        tagProducts.innerHTML = output;
+
+                        elementIndex.innerHTML = index + 1;
+                    </script>
+                {{ /item }}
+            {{ /collection:product }}
+            
+
+        </div>
+    </div>
+</section>
+<!-- End Featured Product -->
+
+<!-- Start Content Page -->
+<div class="container-fluid bg-light py-5">
+    <div class="col-md-6 m-auto text-center">
+        <h1 class="h1">{{ contact_us:title }}</h1>
+        <p>{{ contact_us:description }}</p>
+    </div>
+</div>
+
+<!-- Start Map -->
+<div id="mapid" style="width: 100%; height: 300px;"></div>
+
+<p hidden id="south">{{ contact_us:south }}</p>
+<p hidden id="west">{{ contact_us:west }}</p>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+<script>
+    var south = window.document.getElementById('south');
+    var west = window.document.getElementById('west');
+
+    var mymap = L.map('mapid').setView([south.innerHTML, west.innerHTML, 13], 13);
+
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+        maxZoom: 18,
+        attribution: 'LSL BEE Sumbawa',
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1
+    }).addTo(mymap);
+
+    L.marker([south.innerHTML, west.innerHTML, 13]).addTo(mymap)
+        .bindPopup("LSL BEE Sumbawa<br />Location.").openPopup();
+
+    mymap.scrollWheelZoom.disable();
+    mymap.touchZoom.disable();
+</script>
+<!-- End Map -->

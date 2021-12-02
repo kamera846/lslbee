@@ -1,0 +1,38 @@
+<!-- Start Banner -->
+<section class="bg-success py-5">
+    <div class="container">
+        <div class="row align-items-center py-5">
+            <div class="col-md-8 text-white">
+                <h1>{{ about_us:title }}</h1>
+                <p>{{ about_us:description }}</p>
+            </div>
+            <div class="col-md-4">
+                <img src="{{ about_us:image }}" alt="About Hero">
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Close Banner -->
+
+<!-- Start Section -->
+<section class="container py-5">
+    <div class="row text-center pt-5 pb-3">
+        <div class="col-lg-6 m-auto">
+            <h1 class="h1">{{ our_service:title }}</h1>
+            <p>{{ our_service:description }}</p>
+        </div>
+    </div>
+    <div class="row">
+
+        {{ collection:services }}
+            <div class="col-md-6 col-lg-3 pb-5">
+                <div class="h-100 py-5 services-icon-wap shadow">
+                    <div class="h1 text-success text-center"><img class="service-img" src="{{ icon }}" alt=""></i></div>
+                    <h2 class="h5 mt-4 text-center">{{ title }}</h2>
+                </div>
+            </div>
+        {{ /collection:services }}
+
+    </div>
+</section>
+<!-- End Section -->

@@ -1,0 +1,9 @@
+title: SEO
+data:
+  title: 'LSL BEE'
+  description: 'LSL BEE adalah blablblalab kabk'
+  keywords: 'LSL BEE, LSL, BEE'
+  robots:
+    - nofollow
+    - noindex
+  favicon: brand_01.png

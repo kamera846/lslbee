@@ -1,0 +1,19 @@
+name: 'LSL BEE'
+super: true
+id: 4c05bb14-c4c4-442d-8206-8e884340b296
+password_hash: $2y$10$gV9d8fx0DzXaq9PqJ4if.uGqQlvAEyv98oQDgpFl6YmjfzSEcRpXO
+preferences:
+  assets:
+    assets:
+      mode: grid
+  collections:
+    social_media:
+      columns:
+        - title
+        - slug
+        - link
+        - icon
+    services:
+      columns:
+        - title
+        - icon
